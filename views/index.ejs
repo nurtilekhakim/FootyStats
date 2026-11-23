@@ -1,92 +1,113 @@
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FootyStats | Home</title>
-    <link rel="stylesheet" href="/css/style.css">
-</head>
-<body>
+<%- include('partials/header', { title: 'Home' }) %>
 
-    <header class="navbar">
-        <div class="container nav-content">
-            <a href="/" class="logo">⚽ FootyStats</a>
+<main class="container">
 
-            <nav class="nav-links">
-                <a href="/">Home</a>
-                <a href="/#explore">Explore</a>
-            </nav>
+    <section class="hero">
+        <h1>
+            Explore the World of
+            <span class="accent">Football</span>
+        </h1>
+
+        <p>
+            Discover football clubs, explore players,
+            and follow match results — all in one place.
+        </p>
+
+        <div class="search-box" id="explore">
+            <h2>Find Your Favourite Team</h2>
+
+            <form action="/teams" method="GET">
+                <label for="league">
+                    Select Football League
+                </label>
+
+                <select id="league" name="league" required>
+                    <option value="English Premier League">
+                        English Premier League
+                    </option>
+
+                    <option value="Spanish La Liga">
+                        Spanish La Liga
+                    </option>
+
+                    <option value="German Bundesliga">
+                        German Bundesliga
+                    </option>
+                </select>
+
+                <button class="btn" type="submit">
+                    Explore Teams →
+                </button>
+            </form>
         </div>
-    </header>
+    </section>
 
-    <main class="container">
-        <section class="hero">
-            <h1>
-                Explore the World of
-                <span class="accent">Football</span>
-            </h1>
+    <!-- Modern Team Search -->
+    <section class="search-section">
+
+        <div class="search-glow"></div>
+
+        <div class="search-content">
+
+            <div class="search-badge">
+                ⚡ FOOTBALL DATABASE
+            </div>
+
+            <h2>
+                Find Your
+                <span class="accent">Team.</span>
+            </h2>
 
             <p>
-                Discover football clubs, explore players,
-                and follow match results — all in one place.
+                Search football clubs from around the world.
+                Your next discovery starts here.
             </p>
 
-            <div class="search-box" id="explore">
-                <h2>Find Your Favourite Team</h2>
+            <form
+                action="/search"
+                method="POST"
+                class="modern-search-form"
+            >
 
-                <form action="/teams" method="GET">
-                    <label for="league">Select Football League</label>
+                <div class="modern-search-input">
 
-                    <select id="league" name="league" required>
-                        <option value="English Premier League">
-                            English Premier League
-                        </option>
+                    <span class="search-icon"
+                          aria-hidden="true">
+                        ⌕
+                    </span>
 
-                        <option value="Spanish La Liga">
-                            Spanish La Liga
-                        </option>
+                    <input
+                        type="text"
+                        name="teamName"
+                        placeholder="Try Arsenal, Barcelona, Real Madrid..."
+                        minlength="2"
+                        maxlength="100"
+                        aria-label="Football team name"
+                        required
+                    >
 
-                        <option value="German Bundesliga">
-                            German Bundesliga
-                        </option>
-                    </select>
+                </div>
 
-                    <button class="btn" type="submit">
-                        Explore Teams →
-                    </button>
-                </form>
+                <button
+                    type="submit"
+                    class="modern-search-btn"
+                >
+                    Search Team
+                    <span aria-hidden="true">→</span>
+                </button>
+
+            </form>
+
+            <div class="search-hint">
+                <span class="hint-dot"></span>
+                Explore clubs worldwide
             </div>
-        </section>
-        <section class="search-section">
 
-    <h2>Find Your Football Team</h2>
+        </div>
 
-    <p>Search for your favorite football club</p>
+    </section>
 
-    <form action="/search" method="POST">
+</main>
 
-        <input
-            type="text"
-            name="teamName"
-            placeholder="Enter team name..."
-            minlength="2"
-            maxlength="100"
-            required
-        >
-
-        <button type="submit">
-            Search Team
-        </button>
-
-    </form>
-
-</section>
-    </main>
-
-    <footer class="footer">
-        © 2026 FootyStats | Powered by TheSportsDB
-    </footer>
-
-</body>
-</html>
+<%- include('partials/footer') %>

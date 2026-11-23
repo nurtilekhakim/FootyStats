@@ -1,38 +1,89 @@
-<%- include('partials/header') %>
 
-<main class="container">
+<%- include('partials/header', { title: 'Search Results' }) %>
 
-    <h1>Search Results</h1>
+<main class="container search-results-page">
 
-    <p>Results for: <%= searchQuery %></p>
+    <div class="results-header">
 
-    <% if (teams.length > 0) { %>
+        <div class="search-badge">
+            ⚡ FOOTBALL DATABASE
+        </div>
 
-        <div class="team-grid">
+        <h1>
+            Search <span class="accent">Results.</span>
+        </h1>
+
+        <p>
+            Showing results for
+            <span class="results-query">
+                "<%= searchQuery %>"
+            </span>
+        </p>
+
+        <a href="/#explore" class="results-back">
+            ← Back to Explore
+        </a>
+
+    </div>
+
+    <% if (teams && teams.length > 0) { %>
+
+        <div class="results-count">
+            <%= teams.length %>
+            <%= teams.length === 1 ? 'club found' : 'clubs found' %>
+        </div>
+
+        <div class="results-team-grid">
 
             <% teams.forEach(team => { %>
 
-                <div class="team-card">
+                <article class="results-team-card">
 
-                    <% if (team.strBadge) { %>
-                        <img
-                            src="<%= team.strBadge %>"
-                            alt="<%= team.strTeam %>"
-                            width="100"
-                        >
-                    <% } %>
+                    <div class="results-card-top">
+                        <span class="results-club-label">
+                            FOOTBALL CLUB
+                        </span>
 
-                    <h2><%= team.strTeam %></h2>
+                        <% if (team.strBadge) { %>
+                            <img
+                                src="<%= team.strBadge %>"
+                                alt="<%= team.strTeam %> badge"
+                                class="results-team-logo"
+                                loading="lazy"
+                            >
+                        <% } else { %>
+                            <div class="results-logo-placeholder">
+                                ⚽
+                            </div>
+                        <% } %>
+                    </div>
 
-                    <p>
-                        <%= team.strCountry || 'Unknown country' %>
-                    </p>
+                    <div class="results-card-info">
 
-                    <a href="/team/<%= team.idTeam %>">
-                        View Club →
+                        <h2><%= team.strTeam %></h2>
+
+                        <p class="results-country">
+                            <span>📍</span>
+                            <%= team.strCountry || 'Unknown country' %>
+                        </p>
+
+                        <% if (team.strLeague) { %>
+                            <p class="results-league">
+                                🏆 <%= team.strLeague %>
+                            </p>
+                        <% } %>
+
+                    </div>
+
+                    <a
+                        href="/team/<%= team.idTeam %>"
+                        class="results-view-btn"
+                    >
+                        View Club
+                        <span aria-hidden="true">→</span>
                     </a>
 
-                </div>
+                </article>
 
             <% }) %>
 
@@ -40,7 +91,21 @@
 
     <% } else { %>
 
-        <p>No teams found. Try another name.</p>
+        <div class="results-empty">
+            <div class="results-empty-icon">⚽</div>
+
+            <h2>No teams found</h2>
+
+            <p>
+                We couldn't find a football club matching
+                "<%= searchQuery %>".
+                Try searching with another name.
+            </p>
+
+            <a href="/#explore" class="results-view-btn">
+                Try Another Search →
+            </a>
+        </div>
 
     <% } %>
 
