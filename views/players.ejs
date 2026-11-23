@@ -1,0 +1,66 @@
+
+<%- include('partials/header', { title: 'Players' }) %>
+
+<main class="container">
+
+    <a
+        href="/team/<%= team.idTeam %>"
+        class="back-link"
+    >
+        ← Back to Team
+    </a>
+
+    <h1 class="page-title">
+        <%= team.strTeam %> — Players
+    </h1>
+
+    <p class="muted">
+        Explore the team squad and coaching staff.
+    </p>
+
+    <% if (players.length > 0) { %>
+
+        <div class="grid">
+
+            <% players.forEach(player => { %>
+
+                <div class="card">
+
+                    <% if (player.strCutout || player.strThumb) { %>
+                        <img
+                            class="player-photo"
+                            src="<%= player.strCutout || player.strThumb %>"
+                            alt="<%= player.strPlayer %>"
+                            loading="lazy"
+                        >
+                    <% } %>
+
+                    <h3><%= player.strPlayer %></h3>
+
+                    <p>
+                        Position:
+                        <%= player.strPosition || 'Unknown' %>
+                    </p>
+
+                    <p>
+                        Nationality:
+                        <%= player.strNationality || 'Unknown' %>
+                    </p>
+
+                </div>
+
+            <% }) %>
+
+        </div>
+
+    <% } else { %>
+
+        <div class="info-box">
+            <p>No players available for this team.</p>
+        </div>
+
+    <% } %>
+
+</main>
+
+<%- include('partials/footer') %>

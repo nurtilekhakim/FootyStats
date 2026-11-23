@@ -1,0 +1,87 @@
+
+<%- include('partials/header', { title: team.strTeam }) %>
+
+<main class="container">
+
+    <a href="/" class="back-link">← Back to Home</a>
+
+    <div class="team-header">
+
+        <% if (team.strBadge) { %>
+            <img
+                src="<%= team.strBadge %>"
+                alt="<%= team.strTeam %>"
+            >
+        <% } %>
+
+        <div>
+            <h1 class="page-title"><%= team.strTeam %></h1>
+
+            <p class="muted">
+                <%= team.strLeague || 'Football Club' %>
+            </p>
+
+            <p>
+                <%= team.strCountry || 'Unknown country' %>
+            </p>
+        </div>
+
+    </div>
+
+    <div class="actions">
+
+        <a
+            class="btn"
+            href="/team/<%= team.idTeam %>/players"
+        >
+            View Players →
+        </a>
+
+        <a
+            class="btn"
+            href="/team/<%= team.idTeam %>/matches"
+        >
+            Recent Matches →
+        </a>
+
+    </div>
+
+    <div class="info-box">
+
+        <h2>Club Information</h2>
+
+        <p>
+            <strong>Country:</strong>
+            <%= team.strCountry || 'Unknown' %>
+        </p>
+
+        <p>
+            <strong>League:</strong>
+            <%= team.strLeague || 'Unknown' %>
+        </p>
+
+        <p>
+            <strong>Stadium:</strong>
+            <%= team.strStadium || 'Unknown' %>
+        </p>
+
+        <p>
+            <strong>Founded:</strong>
+            <%= team.intFormedYear || 'Unknown' %>
+        </p>
+
+    </div>
+
+    <div class="info-box">
+
+        <h2>About the Club</h2>
+
+        <p>
+            <%= team.strDescriptionEN || 'No description available.' %>
+        </p>
+
+    </div>
+
+</main>
+
+<%- include('partials/footer') %>

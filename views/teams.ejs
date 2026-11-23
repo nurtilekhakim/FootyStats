@@ -1,0 +1,59 @@
+
+<%- include('partials/header', { title: 'Teams' }) %>
+
+<main class="container">
+
+    <a href="/" class="back-link">← Back to Home</a>
+
+    <h1 class="page-title">
+        ⚽ <%= league %>
+    </h1>
+
+    <p class="muted">
+        Explore football clubs and discover their history.
+    </p>
+
+    <% if (teams.length > 0) { %>
+
+        <div class="grid">
+
+            <% teams.forEach(team => { %>
+
+                <div class="card">
+
+                    <% if (team.strBadge) { %>
+                        <img
+                            src="<%= team.strBadge %>"
+                            alt="<%= team.strTeam %>"
+                            loading="lazy"
+                        >
+                    <% } %>
+
+                    <h3><%= team.strTeam %></h3>
+
+                    <p>
+                        Stadium:
+                        <%= team.strStadium || 'Unknown' %>
+                    </p>
+
+                    <a href="/team/<%= team.idTeam %>">
+                        View Club →
+                    </a>
+
+                </div>
+
+            <% }) %>
+
+        </div>
+
+    <% } else { %>
+
+        <div class="info-box">
+            <p>No teams found for this league.</p>
+        </div>
+
+    <% } %>
+
+</main>
+
+<%- include('partials/footer') %>

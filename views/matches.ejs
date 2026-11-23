@@ -1,0 +1,61 @@
+
+<%- include('partials/header', { title: 'Recent Matches' }) %>
+
+<main class="container">
+
+    <a
+        href="/team/<%= team.idTeam %>"
+        class="back-link"
+    >
+        ← Back to Team
+    </a>
+
+    <h1 class="page-title">
+        ⚽ <%= team.strTeam %> — Recent Matches
+    </h1>
+
+    <p class="muted">
+        Latest match results available from TheSportsDB.
+    </p>
+
+    <% if (matches.length > 0) { %>
+
+        <% matches.forEach(match => { %>
+
+            <div class="match-card">
+
+                <h2>
+                    <%= match.strHomeTeam %>
+                    vs
+                    <%= match.strAwayTeam %>
+                </h2>
+
+                <div class="score">
+                    <%= match.intHomeScore ?? '-' %>
+                    :
+                    <%= match.intAwayScore ?? '-' %>
+                </div>
+
+                <p class="muted">
+                    <%= match.dateEvent || 'Date unknown' %>
+                </p>
+
+                <p>
+                    <%= match.strLeague || 'Unknown competition' %>
+                </p>
+
+            </div>
+
+        <% }) %>
+
+    <% } else { %>
+
+        <div class="info-box">
+            <p>No recent matches available for this team.</p>
+        </div>
+
+    <% } %>
+
+</main>
+
+<%- include('partials/footer') %>

@@ -1,0 +1,25 @@
+
+<%- include('partials/header', { title: 'Error' }) %>
+
+<main class="container">
+
+    <section class="hero">
+
+        <h1 class="accent"><%= status %></h1>
+
+        <h2><%= message %></h2>
+
+        <p>
+            Something went wrong or the requested
+            page could not be found.
+        </p>
+
+        <a href="/" class="btn">
+            Back to Home →
+        </a>
+
+    </section>
+
+</main>
+
+<%- include('partials/footer') %>

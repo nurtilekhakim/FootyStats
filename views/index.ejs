@@ -1,0 +1,68 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FootyStats | Home</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="container nav-content">
+            <a href="/" class="logo">⚽ FootyStats</a>
+
+            <nav class="nav-links">
+                <a href="/">Home</a>
+                <a href="/#explore">Explore</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="hero">
+            <h1>
+                Explore the World of
+                <span class="accent">Football</span>
+            </h1>
+
+            <p>
+                Discover football clubs, explore players,
+                and follow match results — all in one place.
+            </p>
+
+            <div class="search-box" id="explore">
+                <h2>Find Your Favourite Team</h2>
+
+                <form action="/teams" method="GET">
+                    <label for="league">Select Football League</label>
+
+                    <select id="league" name="league" required>
+                        <option value="English Premier League">
+                            English Premier League
+                        </option>
+
+                        <option value="Spanish La Liga">
+                            Spanish La Liga
+                        </option>
+
+                        <option value="German Bundesliga">
+                            German Bundesliga
+                        </option>
+                    </select>
+
+                    <button class="btn" type="submit">
+                        Explore Teams →
+                    </button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        © 2026 FootyStats | Powered by TheSportsDB
+    </footer>
+
+</body>
+</html>
