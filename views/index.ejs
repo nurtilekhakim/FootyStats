@@ -1,50 +1,201 @@
 
 <%- include('partials/header', { title: 'Home' }) %>
 
-<main class="container">
+<main class="container home-v2">
 
-    <section class="hero">
-        <h1>
-            Explore the World of
-            <span class="accent">Football</span>
-        </h1>
+    <!-- HERO SECTION -->
+    <section class="home-hero">
 
-        <p>
-            Discover football clubs, explore players,
-            and follow match results — all in one place.
-        </p>
+        <div class="home-hero-content">
 
-        <div class="search-box" id="explore">
-            <h2>Find Your Favourite Team</h2>
+            <div class="home-eyebrow">
+                <span class="home-live-dot"></span>
+                YOUR FOOTBALL WORLD
+            </div>
 
-            <form action="/teams" method="GET">
-                <label for="league">
-                    Select Football League
-                </label>
+            <h1>
+                THE GAME.
+                <br>
+                <span class="accent">THE DATA.</span>
+                <br>
+                YOUR WAY.
+            </h1>
 
-                <select id="league" name="league" required>
-                    <option value="English Premier League">
-                        English Premier League
-                    </option>
+            <p>
+                Explore the world's football clubs,
+                discover players, and follow recent
+                match results. All in one place.
+            </p>
 
-                    <option value="Spanish La Liga">
-                        Spanish La Liga
-                    </option>
+            <div class="home-hero-actions">
+                <a href="#leagues" class="home-primary-btn">
+                    Explore Football
+                    <span>↗</span>
+                </a>
 
-                    <option value="German Bundesliga">
-                        German Bundesliga
-                    </option>
-                </select>
+                <a href="#team-search" class="home-secondary-btn">
+                    Search a Club →
+                </a>
+            </div>
 
-                <button class="btn" type="submit">
-                    Explore Teams →
+            <div class="home-stats">
+                <div>
+                    <strong>03</strong>
+                    <span>Featured Leagues</span>
+                </div>
+
+                <div>
+                    <strong>05</strong>
+                    <span>API Operations</span>
+                </div>
+
+                <div>
+                    <strong>24/7</strong>
+                    <span>Online Access</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="home-hero-visual">
+            <div class="home-visual-glow"></div>
+
+            <div class="home-football-art">
+                ⚽
+            </div>
+
+            <div class="home-floating-card home-float-top">
+                <span>⚡ EXPLORE</span>
+                <strong>FOOTBALL DATA</strong>
+            </div>
+
+            <div class="home-floating-card home-float-bottom">
+                <span>GLOBAL CLUB DATABASE</span>
+                <strong>Discover More ↗</strong>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- LEAGUES -->
+    <section class="home-leagues" id="leagues">
+
+        <div class="home-section-heading">
+            <div>
+                <span class="home-section-label">
+                    DISCOVER FOOTBALL
+                </span>
+
+                <h2>
+                    Explore <span class="accent">Leagues.</span>
+                </h2>
+            </div>
+
+            <p>
+                Choose your favorite competition
+                and discover its football clubs.
+            </p>
+        </div>
+
+        <div class="home-league-grid">
+
+            <!-- PREMIER LEAGUE -->
+            <form action="/teams" method="GET"
+                  class="home-league-card">
+
+                <input type="hidden" name="league"
+                       value="English Premier League">
+
+                <div class="home-league-top">
+                    <span class="home-league-symbol">
+                        <img
+                            src="https://flagcdn.com/gb-eng.svg"
+                            alt="England flag"
+                            loading="lazy"
+                        >
+                    </span>
+                    <span class="home-league-arrow">↗</span>
+                </div>
+
+                <span class="home-league-country">
+                    ENGLAND
+                </span>
+
+                <h3>Premier League</h3>
+
+                <p>Explore English football clubs.</p>
+
+                <button type="submit">
+                    Explore League →
                 </button>
             </form>
+
+            <!-- LA LIGA -->
+            <form action="/teams" method="GET"
+                  class="home-league-card">
+
+                <input type="hidden" name="league"
+                       value="Spanish La Liga">
+
+                <div class="home-league-top">
+                    <span class="home-league-symbol">
+                        <img
+                            src="https://flagcdn.com/es.svg"
+                            alt="Spain flag"
+                            loading="lazy"
+                        >
+                    </span>
+                    <span class="home-league-arrow">↗</span>
+                </div>
+
+                <span class="home-league-country">
+                    SPAIN
+                </span>
+
+                <h3>La Liga</h3>
+
+                <p>Discover Spanish football clubs.</p>
+
+                <button type="submit">
+                    Explore League →
+                </button>
+            </form>
+
+            <!-- BUNDESLIGA -->
+            <form action="/teams" method="GET"
+                  class="home-league-card">
+
+                <input type="hidden" name="league"
+                       value="German Bundesliga">
+
+                <div class="home-league-top">
+                    <span class="home-league-symbol">
+                        <img
+                            src="https://flagcdn.com/de.svg"
+                            alt="Germany flag"
+                            loading="lazy"
+                        >
+                    </span>
+                    <span class="home-league-arrow">↗</span>
+                </div>
+
+                <span class="home-league-country">
+                    GERMANY
+                </span>
+
+                <h3>Bundesliga</h3>
+
+                <p>Explore German football clubs.</p>
+
+                <button type="submit">
+                    Explore League →
+                </button>
+            </form>
+
         </div>
     </section>
 
-    <!-- Modern Team Search -->
-    <section class="search-section">
+    <!-- SEARCH -->
+    <section class="search-section" id="team-search">
 
         <div class="search-glow"></div>
 
@@ -55,8 +206,7 @@
             </div>
 
             <h2>
-                Find Your
-                <span class="accent">Team.</span>
+                Find Your <span class="accent">Team.</span>
             </h2>
 
             <p>
@@ -64,18 +214,12 @@
                 Your next discovery starts here.
             </p>
 
-            <form
-                action="/search"
-                method="POST"
-                class="modern-search-form"
-            >
+            <form action="/search" method="POST"
+                  class="modern-search-form">
 
                 <div class="modern-search-input">
-
                     <span class="search-icon"
-                          aria-hidden="true">
-                        ⌕
-                    </span>
+                          aria-hidden="true">⌕</span>
 
                     <input
                         type="text"
@@ -86,26 +230,20 @@
                         aria-label="Football team name"
                         required
                     >
-
                 </div>
 
-                <button
-                    type="submit"
-                    class="modern-search-btn"
-                >
+                <button type="submit"
+                        class="modern-search-btn">
                     Search Team
                     <span aria-hidden="true">→</span>
                 </button>
-
             </form>
 
             <div class="search-hint">
                 <span class="hint-dot"></span>
                 Explore clubs worldwide
             </div>
-
         </div>
-
     </section>
 
 </main>

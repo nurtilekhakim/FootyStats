@@ -1,65 +1,163 @@
 
 <%- include('partials/header', { title: 'Players' }) %>
 
-<main class="container">
+<main class="container squad-page">
 
     <a
         href="/team/<%= team.idTeam %>"
-        class="back-link"
+        class="club-back-link"
     >
         ← Back to Team
     </a>
 
-    <h1 class="page-title">
-        <%= team.strTeam %> — Players
-    </h1>
+    <!-- SQUAD HEADER -->
+    <section class="squad-hero">
 
-    <p class="muted">
-        Explore the team squad and coaching staff.
-    </p>
+        <div class="squad-hero-glow"></div>
 
-    <% if (players.length > 0) { %>
+        <div class="squad-hero-content">
 
-        <div class="grid">
+            <span class="club-label">
+                ⚡ FOOTBALL SQUAD
+            </span>
 
-            <% players.forEach(player => { %>
+            <h1>
+                <%= team.strTeam %>
+                <span class="accent">Squad.</span>
+            </h1>
 
-                <div class="card">
+            <p>
+                Meet the players and coaching staff
+                representing <%= team.strTeam %>.
+            </p>
 
-                    <% if (player.strCutout || player.strThumb) { %>
-                        <img
-                            class="player-photo"
-                            src="<%= player.strCutout || player.strThumb %>"
-                            alt="<%= player.strPlayer %>"
-                            loading="lazy"
-                        >
-                    <% } %>
+            <div class="squad-hero-stats">
 
-                    <h3><%= player.strPlayer %></h3>
-
-                    <p>
-                        Position:
-                        <%= player.strPosition || 'Unknown' %>
-                    </p>
-
-                    <p>
-                        Nationality:
-                        <%= player.strNationality || 'Unknown' %>
-                    </p>
-
+                <div>
+                    <strong><%= players.length %></strong>
+                    <span>Squad Members</span>
                 </div>
 
-            <% }) %>
+                <div>
+                    <strong>FC</strong>
+                    <span>Football Club</span>
+                </div>
+
+            </div>
 
         </div>
 
-    <% } else { %>
+        <% if (team.strBadge) { %>
+            <img
+                src="<%= team.strBadge %>"
+                alt="<%= team.strTeam %> logo"
+                class="squad-team-logo"
+            >
+        <% } %>
 
-        <div class="info-box">
-            <p>No players available for this team.</p>
+    </section>
+
+    <!-- PLAYER LIST -->
+    <section class="squad-list-section">
+
+        <div class="squad-section-heading">
+
+            <div>
+                <span class="home-section-label">
+                    THE TEAM
+                </span>
+
+                <h2>
+                    Meet the <span class="accent">Players.</span>
+                </h2>
+            </div>
+
+            <span class="squad-count">
+                <%= players.length %>
+                <%= players.length === 1 ? 'Member' : 'Members' %>
+            </span>
+
         </div>
 
-    <% } %>
+        <% if (players.length > 0) { %>
+
+            <div class="squad-grid">
+
+                <% players.forEach(player => { %>
+
+                    <article class="squad-card">
+
+                        <div class="squad-photo-box">
+
+                            <% if (player.strCutout || player.strThumb) { %>
+                                <img
+                                    src="<%= player.strCutout || player.strThumb %>"
+                                    alt="<%= player.strPlayer %>"
+                                    class="squad-photo"
+                                    loading="lazy"
+                                >
+                            <% } else { %>
+                                <span class="squad-photo-fallback">
+                                    👤
+                                </span>
+                            <% } %>
+
+                            <% if (player.strNumber) { %>
+                                <span class="squad-number">
+                                    #<%= player.strNumber %>
+                                </span>
+                            <% } %>
+
+                        </div>
+
+                        <div class="squad-card-content">
+
+                            <span class="squad-position">
+                                <%= player.strPosition || 'Squad Member' %>
+                            </span>
+
+                            <h3>
+                                <%= player.strPlayer || 'Unknown Player' %>
+                            </h3>
+
+                            <div class="squad-card-divider"></div>
+
+                            <div class="squad-meta">
+                                <span>Nationality</span>
+                                <strong>
+                                    <%= player.strNationality || 'Unknown' %>
+                                </strong>
+                            </div>
+
+                        </div>
+
+                    </article>
+
+                <% }) %>
+
+            </div>
+
+        <% } else { %>
+
+            <div class="squad-empty">
+                <span>⚽</span>
+                <h3>No Players Available</h3>
+                <p>
+                    Squad information is currently unavailable
+                    for this football club.
+                </p>
+
+                <a
+                    href="/team/<%= team.idTeam %>"
+                    class="club-primary-btn"
+                >
+                    Back to Club →
+                </a>
+            </div>
+
+        <% } %>
+
+    </section>
 
 </main>
 

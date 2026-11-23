@@ -1,60 +1,199 @@
 
 <%- include('partials/header', { title: 'Recent Matches' }) %>
 
-<main class="container">
+<main class="container fixtures-page">
 
     <a
         href="/team/<%= team.idTeam %>"
-        class="back-link"
+        class="club-back-link"
     >
         ← Back to Team
     </a>
 
-    <h1 class="page-title">
-        ⚽ <%= team.strTeam %> — Recent Matches
-    </h1>
+    <!-- MATCHES HERO -->
+    <section class="fixtures-hero">
 
-    <p class="muted">
-        Latest match results available from TheSportsDB.
-    </p>
+        <div class="fixtures-hero-glow"></div>
 
-    <% if (matches.length > 0) { %>
+        <div class="fixtures-hero-content">
 
-        <% matches.forEach(match => { %>
+            <span class="club-label">
+                ⚡ FOOTBALL RESULTS
+            </span>
 
-            <div class="match-card">
+            <h1>
+                Recent <span class="accent">Matches.</span>
+            </h1>
 
-                <h2>
-                    <%= match.strHomeTeam %>
-                    vs
-                    <%= match.strAwayTeam %>
-                </h2>
+            <p>
+                Explore recent football results
+                and match information for
+                <%= team.strTeam %>.
+            </p>
 
-                <div class="score">
-                    <%= match.intHomeScore ?? '-' %>
-                    :
-                    <%= match.intAwayScore ?? '-' %>
+            <div class="fixtures-hero-stats">
+                <div>
+                    <strong><%= matches.length %></strong>
+                    <span>Available Matches</span>
                 </div>
 
-                <p class="muted">
-                    <%= match.dateEvent || 'Date unknown' %>
-                </p>
+                <div>
+                    <strong><%= team.strTeam %></strong>
+                    <span>Selected Club</span>
+                </div>
+            </div>
 
-                <p>
-                    <%= match.strLeague || 'Unknown competition' %>
-                </p>
+        </div>
+
+        <% if (team.strBadge) { %>
+            <img
+                src="<%= team.strBadge %>"
+                alt="<%= team.strTeam %> logo"
+                class="fixtures-team-logo"
+            >
+        <% } %>
+
+    </section>
+
+    <!-- MATCH LIST -->
+    <section class="fixtures-list-section">
+
+        <div class="fixtures-section-heading">
+
+            <div>
+                <span class="home-section-label">
+                    MATCH CENTER
+                </span>
+
+                <h2>
+                    Match <span class="accent">Results.</span>
+                </h2>
+            </div>
+
+            <span class="fixtures-count">
+                <%= matches.length %>
+                <%= matches.length === 1 ? 'Match' : 'Matches' %>
+            </span>
+
+        </div>
+
+        <% if (matches.length > 0) { %>
+
+            <div class="fixtures-list">
+
+                <% matches.forEach(match => { %>
+
+                    <article class="fixture-card">
+
+                        <div class="fixture-top">
+
+                            <span class="fixture-league">
+                                🏆
+                                <%= match.strLeague || 'Football Competition' %>
+                            </span>
+
+                            <span class="fixture-date">
+                                📅
+                                <%= match.dateEvent || 'Date unknown' %>
+                            </span>
+
+                        </div>
+
+                        <div class="fixture-scoreboard">
+
+                            <!-- HOME TEAM -->
+                            <div class="fixture-team fixture-home">
+
+                                <span class="fixture-team-label">
+                                    HOME
+                                </span>
+
+                                <h3>
+                                    <%= match.strHomeTeam || 'Unknown Team' %>
+                                </h3>
+
+                            </div>
+
+                            <!-- SCORE -->
+                            <div class="fixture-score">
+
+                                <% if (
+                                    match.intHomeScore != null &&
+                                    match.intAwayScore != null
+                                ) { %>
+
+                                    <strong>
+                                        <%= match.intHomeScore %>
+                                        <span>:</span>
+                                        <%= match.intAwayScore %>
+                                    </strong>
+
+                                <% } else { %>
+
+                                    <strong class="fixture-no-score">
+                                        VS
+                                    </strong>
+
+                                <% } %>
+
+                                <span class="fixture-score-label">
+                                    <%= (
+                                        match.intHomeScore != null &&
+                                        match.intAwayScore != null
+                                    ) ? 'FULL TIME SCORE' : 'SCORE UNAVAILABLE' %>
+                                </span>
+
+                            </div>
+
+                            <!-- AWAY TEAM -->
+                            <div class="fixture-team fixture-away">
+
+                                <span class="fixture-team-label">
+                                    AWAY
+                                </span>
+
+                                <h3>
+                                    <%= match.strAwayTeam || 'Unknown Team' %>
+                                </h3>
+
+                            </div>
+
+                        </div>
+
+                        <div class="fixture-bottom">
+                            <span>⚽ FootyStats Match Center</span>
+                            <span>Powered by TheSportsDB</span>
+                        </div>
+
+                    </article>
+
+                <% }) %>
 
             </div>
 
-        <% }) %>
+        <% } else { %>
 
-    <% } else { %>
+            <div class="fixtures-empty">
+                <span>⚽</span>
 
-        <div class="info-box">
-            <p>No recent matches available for this team.</p>
-        </div>
+                <h3>No Recent Matches Available</h3>
 
-    <% } %>
+                <p>
+                    Match results are currently unavailable
+                    for this football club.
+                </p>
+
+                <a
+                    href="/team/<%= team.idTeam %>"
+                    class="club-primary-btn"
+                >
+                    Back to Club →
+                </a>
+            </div>
+
+        <% } %>
+
+    </section>
 
 </main>
 

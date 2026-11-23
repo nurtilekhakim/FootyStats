@@ -1,86 +1,251 @@
 
 <%- include('partials/header', { title: team.strTeam }) %>
 
-<main class="container">
+<%
+    const countryFlags = {
+        England: 'gb-eng',
+        Spain: 'es',
+        Germany: 'de'
+    };
 
-    <a href="/" class="back-link">← Back to Home</a>
+    const flagCode = countryFlags[team.strCountry];
+%>
 
-    <div class="team-header">
+<main class="container club-page">
 
-        <% if (team.strBadge) { %>
-            <img
-                src="<%= team.strBadge %>"
-                alt="<%= team.strTeam %>"
-            >
-        <% } %>
+    <a href="/" class="club-back-link">
+        ← Back to Home
+    </a>
 
-        <div>
-            <h1 class="page-title"><%= team.strTeam %></h1>
+    <!-- CLUB HERO -->
+    <section class="club-hero">
 
-            <p class="muted">
-                <%= team.strLeague || 'Football Club' %>
-            </p>
+        <div class="club-hero-glow"></div>
 
-            <p>
-                <%= team.strCountry || 'Unknown country' %>
-            </p>
+        <div class="club-hero-content">
+
+            <div class="club-logo-box">
+                <% if (team.strBadge) { %>
+                    <img
+                        src="<%= team.strBadge %>"
+                        alt="<%= team.strTeam %> logo"
+                        class="club-logo"
+                    >
+                <% } else { %>
+                    <span class="club-logo-fallback">⚽</span>
+                <% } %>
+            </div>
+
+            <div class="club-hero-info">
+
+                <span class="club-label">
+                    ⚡ FOOTBALL CLUB PROFILE
+                </span>
+
+                <h1><%= team.strTeam %></h1>
+
+                <p class="club-subtitle">
+                    <%= team.strLeague || 'Football Club' %>
+                </p>
+
+                <div class="club-tags">
+
+                    <span>
+                        📍 <%= team.strCountry || 'Unknown country' %>
+                    </span>
+
+                    <% if (team.intFormedYear) { %>
+                        <span>
+                            🏆 Founded <%= team.intFormedYear %>
+                        </span>
+                    <% } %>
+
+                </div>
+
+            </div>
         </div>
 
-    </div>
+        <div class="club-hero-actions">
 
-    <div class="actions">
+            <a
+                href="/team/<%= team.idTeam %>/players"
+                class="club-primary-btn"
+            >
+                View Players
+                <span aria-hidden="true">→</span>
+            </a>
 
-        <a
-            class="btn"
-            href="/team/<%= team.idTeam %>/players"
-        >
-            View Players →
-        </a>
+            <a
+                href="/team/<%= team.idTeam %>/matches"
+                class="club-secondary-btn"
+            >
+                Recent Matches
+                <span aria-hidden="true">↗</span>
+            </a>
 
-        <a
-            class="btn"
-            href="/team/<%= team.idTeam %>/matches"
-        >
-            Recent Matches →
-        </a>
+        </div>
 
-    </div>
+    </section>
 
-    <div class="info-box">
+    <!-- CLUB INFORMATION -->
+    <section class="club-details-section">
 
-        <h2>Club Information</h2>
+        <div class="club-section-heading">
+            <span class="home-section-label">
+                CLUB OVERVIEW
+            </span>
 
-        <p>
-            <strong>Country:</strong>
-            <%= team.strCountry || 'Unknown' %>
-        </p>
+            <h2>
+                Club <span class="accent">Information.</span>
+            </h2>
+        </div>
 
-        <p>
-            <strong>League:</strong>
-            <%= team.strLeague || 'Unknown' %>
-        </p>
+        <div class="club-info-grid">
 
-        <p>
-            <strong>Stadium:</strong>
-            <%= team.strStadium || 'Unknown' %>
-        </p>
+            <!-- COUNTRY -->
+            <div class="club-info-card">
 
-        <p>
-            <strong>Founded:</strong>
-            <%= team.intFormedYear || 'Unknown' %>
-        </p>
+                <span class="club-info-icon">
 
-    </div>
+                    <% if (flagCode) { %>
+                        <img
+                            src="https://flagcdn.com/<%= flagCode %>.svg"
+                            alt="<%= team.strCountry %> flag"
+                            class="club-country-flag"
+                        >
+                    <% } else { %>
+                        🌍
+                    <% } %>
 
-    <div class="info-box">
+                </span>
 
-        <h2>About the Club</h2>
+                <span class="club-info-label">
+                    COUNTRY
+                </span>
 
-        <p>
-            <%= team.strDescriptionEN || 'No description available.' %>
-        </p>
+                <h3>
+                    <%= team.strCountry || 'Unknown' %>
+                </h3>
+            </div>
 
-    </div>
+            <!-- LEAGUE -->
+            <div class="club-info-card">
+
+                <span class="club-info-icon">🏆</span>
+
+                <span class="club-info-label">
+                    LEAGUE
+                </span>
+
+                <h3>
+                    <%= team.strLeague || 'Unknown' %>
+                </h3>
+            </div>
+
+            <!-- STADIUM -->
+            <div class="club-info-card">
+
+                <span class="club-info-icon">🏟️</span>
+
+                <span class="club-info-label">
+                    STADIUM
+                </span>
+
+                <h3>
+                    <%= team.strStadium || 'Unknown' %>
+                </h3>
+            </div>
+
+            <!-- FOUNDED -->
+            <div class="club-info-card">
+
+                <span class="club-info-icon">📅</span>
+
+                <span class="club-info-label">
+                    FOUNDED
+                </span>
+
+                <h3>
+                    <%= team.intFormedYear || 'Unknown' %>
+                </h3>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ABOUT THE CLUB -->
+    <section class="club-about">
+
+        <div class="club-about-heading">
+            <span class="home-section-label">
+                THE STORY
+            </span>
+
+            <h2>
+                About <span class="accent">the Club.</span>
+            </h2>
+        </div>
+
+        <div class="club-about-card">
+
+            <p>
+                <%= team.strDescriptionEN ||
+                    'No description available for this club.' %>
+            </p>
+
+        </div>
+
+    </section>
+
+    <!-- EXPLORE MORE -->
+    <section class="club-explore">
+
+        <h2>
+            Explore <span class="accent">More.</span>
+        </h2>
+
+        <div class="club-explore-grid">
+
+            <a
+                href="/team/<%= team.idTeam %>/players"
+                class="club-explore-card"
+            >
+                <span class="club-explore-icon">👥</span>
+
+                <h3>Team Players</h3>
+
+                <p>
+                    Discover the players representing
+                    this football club.
+                </p>
+
+                <span class="club-explore-arrow">
+                    Explore Players →
+                </span>
+            </a>
+
+            <a
+                href="/team/<%= team.idTeam %>/matches"
+                class="club-explore-card"
+            >
+                <span class="club-explore-icon">⚽</span>
+
+                <h3>Recent Matches</h3>
+
+                <p>
+                    Check recent match results
+                    and football scores.
+                </p>
+
+                <span class="club-explore-arrow">
+                    View Matches →
+                </span>
+            </a>
+
+        </div>
+
+    </section>
 
 </main>
 
