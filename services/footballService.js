@@ -72,9 +72,20 @@ async function getLastMatches(teamId) {
     return data.results || [];
 }
 
+// Search teams by name
+async function searchTeamsByName(teamName) {
+    const data = await fetchFromAPI(
+        'searchteams.php',
+        { t: teamName }
+    );
+
+    return data.teams || [];
+}
+
 module.exports = {
     getTeamsByLeague,
     getTeamById,
     getPlayersByTeam,
-    getLastMatches
+    getLastMatches,
+    searchTeamsByName
 };

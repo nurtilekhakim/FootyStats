@@ -1,0 +1,49 @@
+<%- include('partials/header') %>
+
+<main class="container">
+
+    <h1>Search Results</h1>
+
+    <p>Results for: <%= searchQuery %></p>
+
+    <% if (teams.length > 0) { %>
+
+        <div class="team-grid">
+
+            <% teams.forEach(team => { %>
+
+                <div class="team-card">
+
+                    <% if (team.strBadge) { %>
+                        <img
+                            src="<%= team.strBadge %>"
+                            alt="<%= team.strTeam %>"
+                            width="100"
+                        >
+                    <% } %>
+
+                    <h2><%= team.strTeam %></h2>
+
+                    <p>
+                        <%= team.strCountry || 'Unknown country' %>
+                    </p>
+
+                    <a href="/team/<%= team.idTeam %>">
+                        View Club →
+                    </a>
+
+                </div>
+
+            <% }) %>
+
+        </div>
+
+    <% } else { %>
+
+        <p>No teams found. Try another name.</p>
+
+    <% } %>
+
+</main>
+
+<%- include('partials/footer') %>

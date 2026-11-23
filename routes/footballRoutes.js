@@ -17,4 +17,7 @@ router.get('/team/:id/players', validateTeamId, footballController.showPlayers);
 // Recent matches
 router.get('/team/:id/matches', validateTeamId, footballController.showMatches);
 
+// Search for a football team using POST
+router.post('/search', footballController.searchTeam);
+
 module.exports = router;
