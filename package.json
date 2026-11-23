@@ -1,12 +1,20 @@
+
 {
   "name": "footystats",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Football statistics web application using Node.js, Express, EJS and TheSportsDB API",
+  "main": "app.js",
   "scripts": {
+    "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
+  "keywords": [
+    "football",
+    "statistics",
+    "express",
+    "ejs",
+    "api"
+  ],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
